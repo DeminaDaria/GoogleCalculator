@@ -23,16 +23,15 @@ public class GoogleTests {
     @BeforeAll
     public static void setUpAll() {
         WebDriverManager.chromedriver().setup();
+    }
+
+    @BeforeEach
+    public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options);
         calculator = new Calculator(driver);
         expectedResult = new ExpectedResult(driver);
-
-    }
-
-    @BeforeEach
-    public void setUp() {
         driver.get("http://google.com");
     }
 
