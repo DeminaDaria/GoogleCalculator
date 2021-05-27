@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.Calculator;
 import pages.ExpectedResult;
-
+import pages.SearchLine;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,6 +18,7 @@ public class GoogleTests {
     private static WebDriver driver;
     private static Calculator calculator;
     private static ExpectedResult expectedResult;
+    private static SearchLine searchLine;
 
 
     @BeforeAll
@@ -32,6 +33,7 @@ public class GoogleTests {
         driver = new ChromeDriver(options);
         calculator = new Calculator(driver);
         expectedResult = new ExpectedResult(driver);
+        searchLine = new SearchLine(driver);
         driver.get("http://google.com");
     }
 
@@ -43,10 +45,9 @@ public class GoogleTests {
 
     @Test
     public void shouldCheckingOperationsWithIntegers() {
+        searchLine.search("Калькулятор");
 
-        calculator.search("Калькулятор");
-        calculator.buttonSearch.click();
-        calculator.calculate("(1+2)*3-40/5");
+        calculator.caseOne();
 
         String memoryLine = expectedResult.getMemoryValue();
         String resultLine = expectedResult.getResultValue();
@@ -60,9 +61,9 @@ public class GoogleTests {
     @Test
     public void shouldCheckingDivisionsNull() {
 
-        calculator.search("Калькулятор");
-        calculator.buttonSearch.click();
-        calculator.calculate("6/0");
+        searchLine.search("Калькулятор");
+
+        calculator.caseTwo();
 
         String memoryLine = expectedResult.getMemoryValue();
         String resultLine = expectedResult.getResultValue();
@@ -76,10 +77,9 @@ public class GoogleTests {
     @Test
     public void shouldCheckingNoValue() {
 
-        calculator.search("Калькулятор");
-        calculator.buttonSearch.click();
-        calculator.buttonSin.click();
-        calculator.buttonEqual.click();
+        searchLine.search("Калькулятор");
+
+        calculator.caseThree();
 
         String memoryLine = expectedResult.getMemoryValue();
         String resultLine = expectedResult.getResultValue();
