@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import pages.Calculator;
 import pages.ExpectedResult;
 import pages.SearchLine;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,6 +46,7 @@ public class GoogleTests {
 
     @Test
     public void shouldCheckingOperationsWithIntegers() {
+
         searchLine.search("Калькулятор");
 
         calculator.caseOne();
